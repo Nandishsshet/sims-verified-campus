@@ -1,0 +1,134 @@
+
+  [32m[1mVITE[22m v8.3.8[39m  [2mready in [0m[1m787[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m5:16:20 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'skills')
+[39m > mergeLocal src/pages/student/Resume.jsx:15:28
+    13 |    const keep = (l) => l.filter((x) => !hidden.has(x.id));
+    14 |    const reword = (l) => keep(l).map((x) => (Array.isArray(content.bullets?.[x.id]) ? { ...x, bullets: content.bullets...
+    15 |    const have = new Set(base.skills.map((s) => s.name.toLowerCase()));
+       |                              ^
+    16 |    const extra = (content.extraSkills || []).filter((n) => !have.has(n.toLowerCase())).map((name) => ({ name, level: n...
+    17 |    return {
+ > src/pages/student/Resume.jsx:220:50
+ > updateMemo node_modules/react-dom/cjs/react-dom-client.development.js:9179:18
+ > Object.useMemo node_modules/react-dom/cjs/react-dom-client.development.js:29154:17
+ > exports.useMemo node_modules/react/cjs/react.development.js:1297:33
+ > Editor src/pages/student/Resume.jsx:220:17
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+[2m5:16:20 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <Editor> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m5:17:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Resume.jsx, /src/index.css[22m
+[2m5:17:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Resume.jsx, /src/index.css[22m
+[2m5:17:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Resume.jsx, /src/index.css[22m
+[2m5:17:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Resume.jsx, /src/index.css[22m
+[2m5:17:31 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: fit is not defined
+[39m > Editor src/pages/student/Resume.jsx?t=1794829650602:1671:53
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+[2m5:17:31 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <Editor> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m5:17:31 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m5:19:22 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mIn HTML, <div> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <Protected role="student">
+      <Outlet>
+        <RenderedRoute match={{params:{}, ...}} routeContext={{...}}>
+          <ApprovedStudent>
+            <Outlet>
+              <RenderedRoute match={{params:{}, ...}} routeContext={{outlet:null, ...}}>
+                <SkillGap>
+                  <PageHeader>
+                  <Async state={{data:{...}, ...}}>
+                    <Empty title={"Pick the..."}>
+                      <div className="rounded-2x...">
+                        <p>
+>                       <p className="mx-auto mt-1 max-w-md text-sm text-muted">
+>                         <div className="mx-auto mt-5 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
+
+[2m5:19:22 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22m<p> cannot contain a nested <div>.
+See this log for the ancestor stack trace.
+[2m5:19:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/SkillGap.jsx, /src/index.css[22m
+[2m5:20:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/ui.jsx, /src/index.css[22m
+[2m5:20:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/ui.jsx[22m Could not Fast Refresh ("fmtDate" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m5:20:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/ui.jsx[22m
+[2m5:20:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Dashboard.jsx, /src/index.css[22m
+[2m5:20:33 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/student/Academics.jsx, /src/index.css[22m
+[2m6:23:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/layout.jsx, /src/index.css[22m
+[2m6:23:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:23:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:23:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:24:09 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?limit=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[2m6:26:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/class/DataEntry.jsx[22m
+[2m6:27:09 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of null (reading 'length')
+[39m > children src/pages/class/Setup.jsx:99:17
+    97 |          <Card title="Weekly timetable" action={<Button size="sm" variant="secondary" onClick={add}>+ Add lesson</Butt...
+    98 |            {error && <p role="alert" className="mb-4 rounded-xl border border-bad/30 bg-bad-soft px-3.5 py-2.5 text-sm...
+    99 |            {slots.length === 0 ? <p className="text-sm text-muted">No lessons yet.</p> : (
+       |                   ^
+    100|              <ul className="space-y-3">{slots.map((s, i) => (
+    101|                <li key={i} className="grid items-end gap-2 sm:grid-cols-[1.6fr_1fr_.8fr_.8fr_.8fr_auto]">
+ > Async src/ui.jsx:106:9
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+
+[2m6:27:09 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <Async> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m6:27:23 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/class/Setup.jsx[22m
+[2m6:48:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/layout.jsx, /src/index.css[22m
+[2m6:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/layout.jsx, /src/index.css[22m
+[2m6:51:48 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:51:48 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:51:48 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m6:54:51 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/Analytics.jsx[22m
+[2m6:54:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m6:55:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/DepartmentDetail.jsx[22m
+[2m6:55:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/DepartmentDetail.jsx[22m
+[2m7:02:57 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/notifications?limit=8[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[2m7:08:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/shared.jsx[22m
+[2m7:08:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/pages/college/shared.jsx[22m Could not Fast Refresh ("METRICS" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m7:08:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/college/Overview.jsx, /src/pages/college/Analytics.jsx, /src/pages/college/Leaderboard.jsx, /src/pages/college/Instructors.jsx, /src/pages/college/Alerts.jsx, /src/pages/college/DepartmentDetail.jsx[22m
+[2m7:08:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/shared.jsx[22m
+[2m7:08:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/pages/college/shared.jsx[22m Could not Fast Refresh ("METRICS" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m7:08:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/college/Overview.jsx, /src/pages/college/Analytics.jsx, /src/pages/college/Leaderboard.jsx, /src/pages/college/Instructors.jsx, /src/pages/college/Alerts.jsx, /src/pages/college/DepartmentDetail.jsx[22m
+[2m7:08:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/college/shared.jsx[22m
+[2m7:11:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m7:11:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m7:11:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/layout.jsx, /src/index.css[22m
+[2m7:11:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/index.css[22m
+[2m7:23:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m

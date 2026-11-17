@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - name: Unit tests
+        run: npm test
+      # Starts a throw-away embedded PostgreSQL (no service container needed), loads database/schema.sql and runs
+      # every end-to-end test against it.
+      - name: Integration tests
+        run: npm run test:integration
+
+  frontend:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # production dependencies only; fails the build on a high / critical advisory
+      - run: npm audit --omit=dev --audit-level=high
+        working-directory: backend
+      - run: npm audit --omit=dev --audit-level=high
+        working-directory: frontend
+
+  image:
+    name: Docker image
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the image
+        run: docker build -t sims:ci .
+      # the image must boot against a real database and answer its readiness probe
+      - name: Smoke test
+        run: |
+          docker network create sims-ci
+          docker run -d --name db --network sims-ci -e POSTGRES_DB=sims -e POSTGRES_USER=sims -e POSTGRES_PASSWORD=ci-password postgres:16-alpine
+          for i in $(seq 1 30); do docker exec db pg_isready -U sims -d sims && break; sleep 2; done
+          docker run -d --name app --network sims-ci -p 4000:4000 \
+            -e DATABASE_URL=postgresql://sims:ci-password@db:5432/sims \
+            -e JWT_ACCESS_SECRET=$(head -c 48 /dev/urandom | base64 | tr -d '/+=\n') \
+            -e COOKIE_SECURE=false sims:ci
+          for i in $(seq 1 30); do curl -fsS http://localhost:4000/api/v1/health/ready && break; sleep 2; done
+          curl -fsS http://localhost:4000/api/v1/health/ready
+          curl -fsS http://localhost:4000/ | grep -q '<div id="root">'
+          curl -fsS http://localhost:4000/university/colleges | grep -q '<div id="root">'
+      - name: Logs on failure
+        if: failure()
+        run: docker logs app || true

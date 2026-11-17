@@ -1,0 +1,259 @@
+
+> sims-backend@0.2.0 test:integration
+> node scripts/test-db.js
+
+Temporary PostgreSQL ready, schema loaded. Running integration tests...
+
+TAP version 13
+# Subtest: SIMS onboarding flow
+    # Subtest: university head signs up and receives a University Key
+    ok 1 - university head signs up and receives a University Key
+      ---
+      duration_ms: 328.2676
+      type: 'test'
+      ...
+    # Subtest: college admin cannot sign up with a bad or wrong-type key; failures are logged
+    ok 2 - college admin cannot sign up with a bad or wrong-type key; failures are logged
+      ---
+      duration_ms: 127.4661
+      type: 'test'
+      ...
+    # Subtest: college admin signs up with the University Key → college is PENDING and has no key yet
+    ok 3 - college admin signs up with the University Key → college is PENDING and has no key yet
+      ---
+      duration_ms: 34.8851
+      type: 'test'
+      ...
+    # Subtest: only the owning university head can approve; approval issues the College Key
+    ok 4 - only the owning university head can approve; approval issues the College Key
+      ---
+      duration_ms: 67.8151
+      type: 'test'
+      ...
+    # Subtest: instructor joins with the College Key but stays pending until the admin approves
+    ok 5 - instructor joins with the College Key but stays pending until the admin approves
+      ---
+      duration_ms: 55.2327
+      type: 'test'
+      ...
+    # Subtest: second instructor is approved too; role guards hold
+    ok 6 - second instructor is approved too; role guards hold
+      ---
+      duration_ms: 47.3733
+      type: 'test'
+      ...
+    # Subtest: instructors create classes and receive Class Keys
+    ok 7 - instructors create classes and receive Class Keys
+      ---
+      duration_ms: 63.3595
+      type: 'test'
+      ...
+    # Subtest: student joins with a Class Key → pending; duplicates and second class are blocked
+    ok 8 - student joins with a Class Key → pending; duplicates and second class are blocked
+      ---
+      duration_ms: 116.5202
+      type: 'test'
+      ...
+    # Subtest: instructor sees only their own class; approval makes the student a member
+    ok 9 - instructor sees only their own class; approval makes the student a member
+      ---
+      duration_ms: 102.7971
+      type: 'test'
+      ...
+    # Subtest: reject → re-request → roll-number clash → approve; remove blocks rejoining
+    ok 10 - reject → re-request → roll-number clash → approve; remove blocks rejoining
+      ---
+      duration_ms: 102.5271
+      type: 'test'
+      ...
+    # Subtest: regenerating a class key kills the old key, keeps existing students, logs usage
+    ok 11 - regenerating a class key kills the old key, keeps existing students, logs usage
+      ---
+      duration_ms: 65.417
+      type: 'test'
+      ...
+    # Subtest: max uses and expiry are enforced; limits are validated
+    ok 12 - max uses and expiry are enforced; limits are validated
+      ---
+      duration_ms: 99.4659
+      type: 'test'
+      ...
+    # Subtest: revoke stops joins; revoking twice is a 409
+    ok 13 - revoke stops joins; revoking twice is a 409
+      ---
+      duration_ms: 43.1164
+      type: 'test'
+      ...
+    # Subtest: suspending a college disables its keys; reinstating restores them
+    ok 14 - suspending a college disables its keys; reinstating restores them
+      ---
+      duration_ms: 45.7408
+      type: 'test'
+      ...
+    # Subtest: removing an instructor suspends their classes; re-approval restores them
+    ok 15 - removing an instructor suspends their classes; re-approval restores them
+      ---
+      duration_ms: 64.481
+      type: 'test'
+      ...
+    # Subtest: login, refresh rotation, reuse detection and logout
+    ok 16 - login, refresh rotation, reuse detection and logout
+      ---
+      duration_ms: 67.2463
+      type: 'test'
+      ...
+    # Subtest: forgot / reset password: no enumeration, single use, revokes sessions
+    ok 17 - forgot / reset password: no enumeration, single use, revokes sessions
+      ---
+      duration_ms: 60.0768
+      type: 'test'
+      ...
+    # Subtest: changing the password requires the current one and signs everything out
+    ok 18 - changing the password requires the current one and signs everything out
+      ---
+      duration_ms: 57.2902
+      type: 'test'
+      ...
+    # Subtest: repeated wrong keys lock the IP and the account, even for a valid key
+    ok 19 - repeated wrong keys lock the IP and the account, even for a valid key
+      ---
+      duration_ms: 81.227
+      type: 'test'
+      ...
+    1..19
+ok 1 - SIMS onboarding flow
+  ---
+  duration_ms: 3024.0367
+  type: 'suite'
+  ...
+# Subtest: SIMS student flows
+    # Subtest: builds university → college → instructor → class and three students
+    ok 1 - builds university → college → instructor → class and three students
+      ---
+      duration_ms: 409.9037
+      type: 'test'
+      ...
+    # Subtest: a student with no class sees a limited dashboard and cannot use class features
+    ok 2 - a student with no class sees a limited dashboard and cannot use class features
+      ---
+      duration_ms: 32.1787
+      type: 'test'
+      ...
+    # Subtest: a pending student can edit their profile; approval then queues it for verification
+    ok 3 - a pending student can edit their profile; approval then queues it for verification
+      ---
+      duration_ms: 454.7911
+      type: 'test'
+      ...
+    # Subtest: profile validation: future DOB and empty patch are rejected; photo magic bytes enforced
+    ok 4 - profile validation: future DOB and empty patch are rejected; photo magic bytes enforced
+      ---
+      duration_ms: 68.1809
+      type: 'test'
+      ...
+    # Subtest: s1 joins and is approved; instructor-side data is inserted as verified
+    ok 5 - s1 joins and is approved; instructor-side data is inserted as verified
+      ---
+      duration_ms: 110.2124
+      type: 'test'
+      ...
+    # Subtest: attendance: verified-only stats, per-subject alerts, can-miss calculator
+    ok 6 - attendance: verified-only stats, per-subject alerts, can-miss calculator
+      ---
+      duration_ms: 17.1104
+      type: 'test'
+      ...
+    # Subtest: attendance claims are pending, queue for the instructor and are excluded from stats; duplicates → 409
+    ok 7 - attendance claims are pending, queue for the instructor and are excluded from stats; duplicates → 409
+      ---
+      duration_ms: 36.6684
+      type: 'test'
+      ...
+    # Subtest: academics: SGPA/CGPA/backlogs from verified marks; predictor; claims for a passed subject blocked
+    ok 8 - academics: SGPA/CGPA/backlogs from verified marks; predictor; claims for a passed subject blocked
+      ---
+      duration_ms: 94.1161
+      type: 'test'
+      ...
+    # Subtest: a failed subject can be re-attempted (attempt 2, pending) and the claim can be corrected
+    ok 9 - a failed subject can be re-attempted (attempt 2, pending) and the claim can be corrected
+      ---
+      duration_ms: 84.8226
+      type: 'test'
+      ...
+    # Subtest: certificates: upload → pending + queued; file rules; duplicate detection; owner-only download
+    ok 10 - certificates: upload → pending + queued; file rules; duplicate detection; owner-only download
+      ---
+      duration_ms: 139.076
+      type: 'test'
+      ...
+    # Subtest: QR verification is public and only works once the certificate is verified; editing hides it again
+    ok 11 - QR verification is public and only works once the certificate is verified; editing hides it again
+      ---
+      duration_ms: 38.8482
+      type: 'test'
+      ...
+    # Subtest: portfolio: projects with skills; patch does not reset omitted lists; edits re-queue
+    ok 12 - portfolio: projects with skills; patch does not reset omitted lists; edits re-queue
+      ---
+      duration_ms: 63.1655
+      type: 'test'
+      ...
+    # Subtest: skills catalogue and career roles are readable; target role + gap uses verified vs declared skills
+    ok 13 - skills catalogue and career roles are readable; target role + gap uses verified vs declared skills
+      ---
+      duration_ms: 136.5056
+      type: 'test'
+      ...
+    # Subtest: resume: auto-filled from verified data; templates; update; ATS; AI assistant; limits
+    ok 14 - resume: auto-filled from verified data; templates; update; ATS; AI assistant; limits
+      ---
+      duration_ms: 418.5877
+      type: 'test'
+      ...
+    # Subtest: dashboard aggregates only verified data and awards badges
+    ok 15 - dashboard aggregates only verified data and awards badges
+      ---
+      duration_ms: 62.5817
+      type: 'test'
+      ...
+    # Subtest: leaderboard shows names and totals only — never other students' details
+    ok 16 - leaderboard shows names and totals only — never other students' details
+      ---
+      duration_ms: 12.1073
+      type: 'test'
+      ...
+    # Subtest: goals, study plan, announcements, verification status behave
+    ok 17 - goals, study plan, announcements, verification status behave
+      ---
+      duration_ms: 48.1656
+      type: 'test'
+      ...
+    # Subtest: notifications: unread count, mark one, mark all; cannot touch another user's
+    ok 18 - notifications: unread count, mark one, mark all; cannot touch another user's
+      ---
+      duration_ms: 36.8043
+      type: 'test'
+      ...
+    # Subtest: leaving a class withdraws open requests and returns the student to the join gate
+    ok 19 - leaving a class withdraws open requests and returns the student to the join gate
+      ---
+      duration_ms: 50.4212
+      type: 'test'
+      ...
+    1..19
+ok 2 - SIMS student flows
+  ---
+  duration_ms: 3698.8716
+  type: 'suite'
+  ...
+1..2
+# tests 38
+# suites 2
+# pass 38
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3873.4626
+SYNCHRONOUS TERMINATION NOTICE: When explicitly exiting the process via process.exit or via a parent process, asynchronous tasks in your exitHooks will not run. Either remove these tasks, use gracefulExit() instead of process.exit(), or ensure your parent process sends a SIGINT to the process running this code.

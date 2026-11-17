@@ -1,0 +1,7 @@
+
+> sims-backend@0.2.0 dev:db
+> node scripts/dev-db.js
+
+Created database "sims" (schema + catalogue loaded).
+PostgreSQL is running → postgresql://postgres:postgres@localhost:54330/sims
+Leave this window open. Press Ctrl-C to stop.

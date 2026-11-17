@@ -1,0 +1,14 @@
+# keep the build context small and never bake secrets or local data into an image
+**/node_modules
+**/.env
+**/.env.*
+!**/.env.example
+backend/.pgdata-dev
+backend/.pgdata-test
+backend/uploads
+backend/tests
+frontend/dist
+docs
+.git
+.github
+*.md

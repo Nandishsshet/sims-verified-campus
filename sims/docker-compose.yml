@@ -1,0 +1,46 @@
+# SIMS — API + web app + PostgreSQL.
+#   cp .env.example .env     # then fill in DB_PASSWORD and JWT_ACCESS_SECRET (see the comments in that file)
+#   docker compose up -d --build
+#   open http://localhost:8080
+# The database is NOT published to the host; only the app port is. Data lives in the named volumes below.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sims
+      POSTGRES_USER: sims
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sims -d sims"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://sims:${DB_PASSWORD}@db:5432/sims
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?set JWT_ACCESS_SECRET in .env}
+      # the public address users type; also used in password-reset links and as the only allowed browser origin
+      APP_URL: ${APP_URL:-http://localhost:8080}
+      CORS_ORIGIN: ${APP_URL:-http://localhost:8080}
+      # 1 when a reverse proxy / load balancer sits in front (so rate limits and audit see the real client IP)
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      # Secure cookies need https. Behind a TLS proxy leave this true; for a plain-http trial on localhost set false.
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+    ports:
+      - "${APP_PORT:-8080}:4000"
+    volumes:
+      - uploads:/app/backend/uploads
+
+volumes:
+  pgdata:
+  uploads:
